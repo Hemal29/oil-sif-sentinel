@@ -1,0 +1,32 @@
+"use strict";
+
+// W9.6 — Centralized audit event taxonomy. Only events that the existing
+// lifecycle actually produces. Never scatter raw event strings in services.
+const AUDIT_EVENT_TYPES = {
+  REPORT_SUBMITTED: "REPORT_SUBMITTED",
+  REPORT_UPDATED: "REPORT_UPDATED",
+  AI_ASSESSMENT_STARTED: "AI_ASSESSMENT_STARTED",
+  AI_ASSESSMENT_COMPLETED: "AI_ASSESSMENT_COMPLETED",
+  AI_ASSESSMENT_FAILED: "AI_ASSESSMENT_FAILED",
+  REPORT_AUTO_CLOSED: "REPORT_AUTO_CLOSED",
+  HSE_REVIEW_STARTED: "HSE_REVIEW_STARTED",
+  HSE_NEEDS_MORE_INFO: "HSE_NEEDS_MORE_INFO",
+  HSE_REVIEW_CONFIRMED: "HSE_REVIEW_CONFIRMED",
+  HSE_REVIEW_REJECTED: "HSE_REVIEW_REJECTED",
+  REPORT_CLOSED: "REPORT_CLOSED",
+};
+
+const AUDIT_ACTOR_TYPES = {
+  USER: "USER",
+  HSE: "HSE",
+  AI: "AI",
+  SYSTEM: "SYSTEM",
+};
+
+function actorTypeForRole(role) {
+  if (role === "HSE_ADMIN" || role === "HSE_REVIEWER") return AUDIT_ACTOR_TYPES.HSE;
+  if (role === "USER") return AUDIT_ACTOR_TYPES.USER;
+  return AUDIT_ACTOR_TYPES.SYSTEM;
+}
+
+module.exports = { AUDIT_EVENT_TYPES, AUDIT_ACTOR_TYPES, actorTypeForRole };

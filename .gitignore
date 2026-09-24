@@ -1,0 +1,27 @@
+node_modules
+.env
+.env.local
+.next
+dist
+build
+uploads/*
+!uploads/.gitkeep
+__pycache__
+*.pyc
+.venv
+models/*
+!models/.gitkeep
+logs
+.DS_Store
+*.log
+coverage
+
+# Large AI weights - excluded (GitHub 100MB limit, this folder is ~800MB)
+OIL Problem Light Weight ZIP (wihtout Base Model) FINAL/models_weights/
+OIL Problem Light Weight ZIP (wihtout Base Model) FINAL/.env
+
+# Archives & backups
+*.zip
+*.sql
+*.save
+*.backup

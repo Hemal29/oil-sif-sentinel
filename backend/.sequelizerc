@@ -1,0 +1,6 @@
+"use strict";
+
+module.exports = {
+  config: "./config/config.js",
+  "migrations-path": "./migrations",
+};

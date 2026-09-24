@@ -1,0 +1,44 @@
+version: "3.9"
+
+services:
+  mysql:
+    image: mysql:8
+    container_name: sif-mysql
+    restart: unless-stopped
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_DATABASE=oil_sif_sentinel
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD:-root}
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+  backend:
+    build: ./backend
+    container_name: sif-backend
+    restart: unless-stopped
+    ports:
+      - "5000:5000"
+    env_file:
+      - ./backend/.env
+    depends_on:
+      - mysql
+
+  frontend:
+    build: ./frontend
+    container_name: sif-frontend
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:5000/api/v1
+
+  ai-service:
+    build: ./ai-service
+    container_name: sif-ai-service
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+
+volumes:
+  mysql-data:

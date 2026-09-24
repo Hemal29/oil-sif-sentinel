@@ -1,0 +1,3 @@
+# No third-party dependencies — Step 5 prototype uses the Python standard
+# library only (http.server + json + re). Add ML deps here when a real
+# model is plugged in behind models/registry.py.
